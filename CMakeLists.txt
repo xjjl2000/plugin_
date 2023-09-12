@@ -16,14 +16,15 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Network REQU
 find_package(VTK REQUIRED)
 include(${VTK_USE_FILE})
 
+include_directories(include)
 
 set(TS_FILES rvizplugin_zh_CN.ts)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mywidget.cpp
-        mywidget.h
-        rqt_push_button.ui
+        src/main.cpp
+        src/mywidget.cpp
+        include/mywidget.h
+        resource/rqt_push_button.ui
         ${TS_FILES}
 )
 
