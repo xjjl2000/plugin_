@@ -7,7 +7,7 @@
 HandleFunctionInterface* HandleFunctionFactory::getHandleFunction(QString& topic) {
     delete func;
     func= nullptr;
-    if(topic=="img")
+    if(topic=="rosimg")
         func=new RosImageShow();
 
 

@@ -24,6 +24,7 @@ void myWidget::hanleMessage() {
     if(!myUpdServer->getQUdpSocket()->hasPendingDatagrams()|| myUpdServer->getQUdpSocket()->pendingDatagramSize()<=0)
         return;
     //注意收发两端文本要使用对应的编解码
+    qDebug()<<"have msg!";
     QByteArray receivedData;
     receivedData.resize(myUpdServer->getQUdpSocket()->pendingDatagramSize());
     myUpdServer->getQUdpSocket()->readDatagram(receivedData.data(), receivedData.size());
