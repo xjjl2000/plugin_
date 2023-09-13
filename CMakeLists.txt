@@ -23,9 +23,15 @@ set(TS_FILES rvizplugin_zh_CN.ts)
 set(PROJECT_SOURCES
         src/main.cpp
         src/mywidget.cpp
+        src/udpserver/MyUdpServer.cpp        
         include/mywidget.h
         resource/rqt_push_button.ui
         ${TS_FILES}
+        src/handleserver/HandleFunctionFactory.cpp
+        src/handleserver/functionimpl/ImageShow.cpp
+        include/handleserver/HandleFunctionInterface.hpp
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

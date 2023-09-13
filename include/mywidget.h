@@ -2,7 +2,7 @@
 #define MYWIDGET_H
 
 #include <QWidget>
-#include<QtNetwork/QUdpSocket>
+#include"udpserver/MyUpdServer.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class myWidget; }
@@ -18,7 +18,12 @@ public:
 
 private:
     Ui::myWidget *ui;
-    QUdpSocket *updServer;
+    MyUpdServer *myUpdServer;
+
+
+public slots:
+    void hanleMessage();
+
 
 };
 #endif // MYWIDGET_H
