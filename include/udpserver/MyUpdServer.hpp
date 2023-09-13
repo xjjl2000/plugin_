@@ -15,7 +15,7 @@ public:
 
     
     public:
-        MyUpdServer(const std::string& host,int port);
+        MyUpdServer(int port);
 
 
 };

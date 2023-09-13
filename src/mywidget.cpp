@@ -10,7 +10,7 @@ myWidget::myWidget(QWidget *parent)
     , ui(new Ui::myWidget)
 {
     ui->setupUi(this);
-    myUpdServer=new MyUpdServer("localhost",23912);
+    myUpdServer=new MyUpdServer(23912);
     connect(myUpdServer->getQUdpSocket(),&QUdpSocket::readyRead,this,&myWidget::hanleMessage);
 }
 
