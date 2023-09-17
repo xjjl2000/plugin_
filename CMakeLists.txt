@@ -28,7 +28,7 @@ include(${VTK_USE_FILE})
 find_package(PCL 1.10 REQUIRED)
 
 
-message(${PCL_INCLUDE_DIRS})
+# message(${PCL_INCLUDE_DIRS})
 #message("hello")
 include_directories(include ${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})

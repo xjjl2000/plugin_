@@ -27,7 +27,7 @@ public:
         return *this;
     }
 
-    double x = 0,y=0,z=0;
+    float x = 0,y=0,z=0;
 
     MyPoint() = default;
     MyPoint(MyPoint&&) = default;

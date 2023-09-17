@@ -5,7 +5,7 @@
 
 class RosImageShow:public HandleFunctionInterfaceTemplate<QPixmap>{
     void show(Ui::myWidget *ui, QPixmap& data) override {
-         ui->label_image->setPixmap(data);
+         ui->label_image->setPixmap(data.scaled(ui->label_image->width(),ui->label_image->height()));
     }
 
 };
