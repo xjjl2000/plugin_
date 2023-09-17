@@ -11,8 +11,6 @@
 class PointCloudPCLShow : public HandleFunctionInterfaceTemplate<QVector<MyPoint> > {
 private:
     pcl::visualization::PCLVisualizer::Ptr view;
-public:
-    PointCloudPCLShow(pcl::visualization::PCLVisualizer::Ptr view):view(view){};
     void show(Ui::myWidget *ui, QVector<MyPoint> &data) override {
         //testpcl
 
@@ -46,5 +44,15 @@ public:
 
 
     }
+    QVector<MyPoint> parse(Ui::myWidget *ui,QByteArray* data) override{
+        QByteArray tp= qUncompress(*data);
+        QVector<MyPoint> t;
+        QDataStream dataStream(&tp, QIODevice::ReadOnly);
+        dataStream >> t;
+        return t;
+    }
+
+public:
+    PointCloudPCLShow(pcl::visualization::PCLVisualizer::Ptr view):view(view){};
 
 };
