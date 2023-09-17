@@ -13,10 +13,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Network REQUIRED)
-find_package(VTK REQUIRED)
+find_package(VTK REQUIRED vtkFiltersParallelDIY2)
 include(${VTK_USE_FILE})
+find_package(PCL REQUIRED)
 
-include_directories(include)
+
+message(${PCL_INCLUDE_DIRS})
+#message("hello")
+include_directories(include ${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
 
 set(TS_FILES rvizplugin_zh_CN.ts)
 
@@ -28,13 +33,12 @@ set(PROJECT_SOURCES
         src/handleserver/functionimpl/ImageShow.cpp
         include/handleserver/HandleFunctionInterface.hpp
         src/udpserver/UdpMessage.cpp
-        
+        src/handleserver/functionimpl/PointCloudShow.cpp
+
         include/mywidget.h
-
-
-
         resource/rqt_push_button.ui
-        ${TS_FILES}
+        #${TS_FILES}
+        src/handleserver/MyPoint.cpp
 
 )
 
@@ -65,7 +69,13 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(rvizplugin PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${VTK_LIBRARIES} Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(rvizplugin PRIVATE
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Network
+        ${VTK_LIBRARIES}
+        ${PCL_LIBRARIES}
+        vtkFiltersParallelDIY2
+)
 
 set_target_properties(rvizplugin PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

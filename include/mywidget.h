@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include"udpserver/MyUpdServer.hpp"
+#include "pcl/visualization/pcl_visualizer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class myWidget; }
@@ -19,6 +20,7 @@ public:
 private:
     Ui::myWidget *ui;
     MyUpdServer *myUpdServer;
+    pcl::visualization::PCLVisualizer::Ptr view;
 
 
 public slots:

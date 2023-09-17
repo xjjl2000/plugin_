@@ -3,7 +3,7 @@
 #include "UI_rqt_push_button.h"
 #include "udpserver/UdpMessage.hpp"
 #include "handleserver/HandleFunctionFactory.hpp"
-
+#include "vtkRenderWindow.h"
 
 myWidget::myWidget(QWidget *parent)
     : QWidget(parent)
@@ -12,6 +12,11 @@ myWidget::myWidget(QWidget *parent)
     ui->setupUi(this);
     myUpdServer=new MyUpdServer(23912);
     connect(myUpdServer->getQUdpSocket(),&QUdpSocket::readyRead,this,&myWidget::hanleMessage);
+
+    view.reset(new pcl::visualization::PCLVisualizer("3d view", false));
+    ui->qvtkWidget->SetRenderWindow(view->getRenderWindow());
+    view->setupInteractor(ui->qvtkWidget->GetInteractor(),ui->qvtkWidget->GetRenderWindow());
+
 }
 
 myWidget::~myWidget()
@@ -33,7 +38,7 @@ void myWidget::hanleMessage() {
     QDataStream dataStream(&receivedData, QIODevice::ReadOnly);
     dataStream >> udpMessage;
     //hanle
-    HandleFunctionFactory(handleFunctionFactory);
+    HandleFunctionFactory handleFunctionFactory(view);
     HandleFunctionInterface* func=handleFunctionFactory.getHandleFunction(udpMessage.topic);
     func->run(ui,&udpMessage.data);
 
