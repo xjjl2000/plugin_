@@ -13,9 +13,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Network REQUIRED)
-find_package(VTK REQUIRED vtkFiltersParallelDIY2)
+find_package(VTK 7 REQUIRED  COMPONENTS
+        vtkCommonCore
+        vtkFiltersSources
+        vtkGUISupportQt
+        vtkIOImage
+        vtkInteractionImage
+        vtkFiltersCore
+        vtkInfovisCore
+        vtkInteractionStyle
+        #vtkViewsQt
+)
 include(${VTK_USE_FILE})
-find_package(PCL REQUIRED)
+find_package(PCL 1.10 REQUIRED)
 
 
 message(${PCL_INCLUDE_DIRS})
@@ -74,7 +84,9 @@ target_link_libraries(rvizplugin PRIVATE
         Qt${QT_VERSION_MAJOR}::Network
         ${VTK_LIBRARIES}
         ${PCL_LIBRARIES}
-        vtkFiltersParallelDIY2
+        #vtkFiltersParallelDIY2
+        vtkGUISupportQt
+        #${PCL_APPS_LIBRARY}
 )
 
 set_target_properties(rvizplugin PROPERTIES
